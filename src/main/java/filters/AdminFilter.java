@@ -1,4 +1,3 @@
-
 package filters;
 
 import ca.sait.securitydemo12.models.User;
@@ -19,7 +18,6 @@ import javax.servlet.http.*;
  * @author Kingston
  */
 public class AdminFilter implements Filter {
-    
 
     /**
      *
@@ -36,45 +34,29 @@ public class AdminFilter implements Filter {
         HttpServletRequest httpRequest = (HttpServletRequest) request;
         HttpServletResponse httpResponse = (HttpServletResponse) response;
         HttpSession session = httpRequest.getSession();
-        String email = (String)session.getAttribute("email");
-        
+        String email = (String) session.getAttribute("email");
+
         User user = (User) session.getAttribute("user");
-        
-        if(user.getRole().getRoleId() == 1) {
+
+        if (user.getRole().getRoleId() == 1) {
             chain.doFilter(request, response);
         } else {
             httpResponse.sendRedirect("/notes");
         }
-      
-        // Ceck if user is an admin or not
-            // if Admin
-        //chain.doFilter(request, response);
-        
-            //if not admin
-        //httpResponse.sendRedirect("/notes");
-        
-        
+
     }
-        
-
-
-
 
     /**
      * Destroy method for this filter
      */
-    public void destroy() {        
+    public void destroy() {
     }
 
     /**
      * Init method for this filter
      */
-    public void init(FilterConfig filterConfig) {        
+    public void init(FilterConfig filterConfig) {
 
     }
 
-    
-
-
-    
 }
